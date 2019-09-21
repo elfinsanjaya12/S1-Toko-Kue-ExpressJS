@@ -1,0 +1,42 @@
+<!-- Modal Update Product-->
+<form role="form" id="simpan_barang">
+  <div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Barang</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="kode_barang">Kode Barang</label>
+            <input type="text" name="kode_barang" class="form-control" placeholder="Masukan Kode Barang" required>
+          </div>
+
+          <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" name="nama_barang" class="form-control" placeholder="Masukan Nama" required>
+          </div>
+
+          <div class="form-group">
+            <label for="satuan">Satuan</label>
+            <input type="text" name="satuan" class="form-control" placeholder="Masukan Satuan" required>
+          </div>
+
+          <div class="form-group">
+            <label for="harga">Harga</label>
+            <input type="number" name="harga" class="form-control" placeholder="Masukan Harga" required>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

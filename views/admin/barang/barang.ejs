@@ -17,7 +17,7 @@
           <div class="box-body">
             <div style="margin: 0 20px 20px 20px;">
               <!-- <button class="btn btn-success">Tambah</button> -->
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_modal">
                 Tambah
               </button>
             </div>
@@ -66,6 +66,8 @@
   <!-- /.content -->
 </div>
 
+<!-- include add modal -->
+<%- include add_modal.ejs %>
 
 <%- include ../../partials/admin_layout/footer.ejs %>
 <!-- page script -->
@@ -76,20 +78,20 @@
 
     // redirect halaman guru
     function successTambah() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/guru')
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/barang')
     }
 
     // function simpan
-    $('#simpan_guru').on('submit', function (event) {
+    $('#simpan_barang').on('submit', function (event) {
       event.preventDefault();
       $.ajax({
-        url: "/admin/guru",
+        url: "/admin/barang/create",
         method: "POST",
         data: $(this).serialize(),
         success: function () {
           swal({
             title: "Success",
-            text: "Success Tambah Data Guru",
+            text: "Success Tambah Data Barang",
             icon: "success",
             button: "Oke",
           }).then(suksesDelete => {
