@@ -4,6 +4,7 @@ const Op = require("sequelize").Op
 exports.viewBarang = async (req, res) => {
   const barang = await Barang.findAll()
   res.render("admin/barang/view_barang", {
+    title: "Barang",
     barang: barang
   })
 }

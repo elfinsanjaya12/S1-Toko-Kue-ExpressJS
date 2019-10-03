@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/admin', function (req, res, next) {
-  res.render('admin/dashboard/dashboard');
+  res.render('admin/dashboard/dashboard', { title: "Home" });
 });
 
 module.exports = router;
