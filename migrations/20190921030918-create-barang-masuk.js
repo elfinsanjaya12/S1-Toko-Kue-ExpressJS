@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       tanggal_masuk: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,
