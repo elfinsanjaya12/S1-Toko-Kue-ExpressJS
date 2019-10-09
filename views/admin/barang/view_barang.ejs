@@ -115,29 +115,6 @@
     })
   })
 
-  // Delete guru 
-  function delete_guru(id) {
-    let idGuru = id;
-    swal({
-      title: "Yakin Ingin Menghapus Data Guru ini?",
-      text: "Data yang dihapus, tidak bisa kembali lagi.",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true
-    }).then(willDelete => {
-      if (willDelete) {
-        swal({
-          title: "Success",
-          text: "Success Delete Data Guru",
-          icon: "success",
-          button: "Oke",
-        }).then(suksesDelete => {
-          window.location.assign(`/admin/guru/delete/${idGuru}`);
-        });
-      }
-    });
-  }
-
 
   // Change Status 
   function update_status(id) {

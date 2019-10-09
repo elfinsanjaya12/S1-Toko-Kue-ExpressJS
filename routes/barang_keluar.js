@@ -3,7 +3,7 @@ var router = express.Router();
 let {
   viewBarang,
   actionCreate
-} = require("../controllers/barangMasukController")
+} = require("../controllers/barangKeluarController")
 
 const auth = require("../middlewares/auth")
 

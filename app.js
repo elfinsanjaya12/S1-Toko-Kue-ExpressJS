@@ -9,8 +9,9 @@ const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/users');
-let barangRouter = require('./routes/barang')
-let barangMasukRouter = require('./routes/barang_masuk')
+let barangRouter = require('./routes/barang');
+let barangMasukRouter = require('./routes/barang_masuk');
+let barangKeluarRouter = require('./routes/barang_keluar');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/admin', barangRouter);
 app.use('/admin/barang-masuk/', barangMasukRouter);
+app.use('/admin/barang-keluar/', barangKeluarRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
