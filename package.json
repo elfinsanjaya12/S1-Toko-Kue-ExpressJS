@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "db_reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
-    "db_start": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
+    "dev": "node_modules/.bin/nodemon ./bin/www",
+    "db_reset": "node_modules/.bin/sequelize-cli db:drop && node_modules/.bin/sequelize-cli db:create && node_modules/.bin/sequelize-cli db:migrate && node_modules/.bin/sequelize-cli db:seed:all",
+    "db_start": "node_modules/.bin/sequelize-cli db:create && node_modules/.bin/sequelize-cli db:migrate && node_modules/.bin/sequelize-cli db:seed:all"
   },
   "dependencies": {
     "admin-lte": "^2.4.18",
@@ -23,5 +23,9 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.18.4",
     "sweetalert2": "^8.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "sequelize-cli": "^5.5.1"
   }
 }
