@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Persediaans', [{
       BarangId: 1,
       tanggal_persediaan: new Date(),
-      stok: 10
+      stok: 0
     }], {});
 
   },

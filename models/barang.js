@@ -4,9 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     kode_barang: DataTypes.STRING,
     nama_barang: DataTypes.STRING,
     satuan: DataTypes.STRING,
-    harga: DataTypes.INTEGER
+    harga: DataTypes.INTEGER,
+    status: DataTypes.STRING
   }, {});
-  Barang.associate = function(models) {
+  Barang.associate = function (models) {
     // associations can be defined here
   };
   return Barang;

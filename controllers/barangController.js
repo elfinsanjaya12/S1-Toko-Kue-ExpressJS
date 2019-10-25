@@ -45,7 +45,8 @@ exports.actionCreate = async (req, res) => {
       kode_barang: code_auto,
       nama_barang,
       satuan,
-      harga
+      harga,
+      status: "Nonactive"
     })
     res.redirect("/admin/barang");
   } catch (err) {

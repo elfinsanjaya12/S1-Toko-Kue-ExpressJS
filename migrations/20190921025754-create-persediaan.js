@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       tanggal_persediaan: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       stok: {
         type: Sequelize.INTEGER

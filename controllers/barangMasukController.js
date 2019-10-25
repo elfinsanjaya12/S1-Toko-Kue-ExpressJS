@@ -1,4 +1,4 @@
-const { BarangMasuk, Barang } = require('../models')
+const { BarangMasuk, Barang, Persediaan } = require('../models')
 const Op = require("sequelize").Op
 
 exports.viewBarang = async (req, res) => {
@@ -17,13 +17,28 @@ exports.viewBarang = async (req, res) => {
 }
 
 exports.actionCreate = async (req, res) => {
-  const { BarangId, kode_barang_masuk, jumlah, tanggal_masuk } = req.body
-
+  const {
+    BarangId,
+    kode_barang_masuk,
+    jumlah,
+    tanggal_masuk
+  } = req.body
 
   try {
-    await BarangMasuk.create({
-      kode_barang_masuk, BarangId, jumlah, tanggal_masuk
+    const barang = await Persediaan.findOne({
+      where: { id: { [Op.eq]: BarangId } }
     })
+    if (barang !== null || barang !== "") {
+      barang.stok += jumlah
+      await barang.save();
+      await BarangMasuk.create({
+        kode_barang_masuk,
+        BarangId,
+        jumlah,
+        tanggal_masuk
+      })
+      res.redirect("/admin/barang-masuk");
+    }
     res.redirect("/admin/barang-masuk");
   } catch (err) {
     throw err

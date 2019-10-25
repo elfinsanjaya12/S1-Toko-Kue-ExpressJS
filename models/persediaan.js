@@ -5,8 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     tanggal_persediaan: DataTypes.DATE,
     stok: DataTypes.INTEGER
   }, {});
-  Persediaan.associate = function(models) {
+  Persediaan.associate = function (models) {
     // associations can be defined here
+    Persediaan.belongsTo(sequelize.models.Barang, {
+      foreignKey: "BarangId"
+    });
   };
   return Persediaan;
 };
