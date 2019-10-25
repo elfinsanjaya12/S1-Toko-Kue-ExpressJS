@@ -19,15 +19,28 @@ exports.viewPersediaan = async (req, res) => {
   })
 }
 
-exports.actionPersediaanCreate = (req, res) => {
+exports.actionPersediaanCreate = async (req, res) => {
   const { tanggal_persediaan, BarangId } = req.body
-  Persediaan.create({
-    tanggal_persediaan,
-    BarangId,
-    stok: 0
-  }).then(() => {
+
+  const barang = await Barang.findOne({
+    where: {
+      id: { [Op.eq]: BarangId }
+    }
+  })
+
+  if (barang !== null) {
+    barang.status = "Active";
+    await barang.save();
+    Persediaan.create({
+      tanggal_persediaan,
+      BarangId,
+      stok: 0
+    }).then(() => {
+      res.redirect('/admin/persediaan-barang')
+    }).catch((err) => {
+      res.redirect('/admin/persediaan-barang')
+    });
+  } else {
     res.redirect('/admin/persediaan-barang')
-  }).catch((err) => {
-    res.redirect('/admin/persediaan-barang')
-  });
+  }
 }
