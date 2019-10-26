@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 let {
-  viewBarang,
+  viewBarangKeluar,
   actionCreate
 } = require("../controllers/barangKeluarController")
 
 const auth = require("../middlewares/auth")
 
-router.get("/", auth.isLogin, viewBarang)
+router.get("/", auth.isLogin, viewBarangKeluar)
 router.post("/create", actionCreate)
 
 

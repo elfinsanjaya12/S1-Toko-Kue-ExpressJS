@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
 
     return queryInterface.bulkInsert('BarangKeluars', [{
-      kode_barang_keluar: 'BK-001',
+      kode_barang_keluar: 'BK-OO1',
       BarangId: 1,
       jumlah: 20,
       tanggal_keluar: new Date()
