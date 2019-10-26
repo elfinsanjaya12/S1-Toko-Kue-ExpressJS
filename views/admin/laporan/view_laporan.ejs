@@ -11,7 +11,7 @@
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <h3 class="box-title">Data Barang Masuk</h3>
+            <h3 class="box-title">Data Persediaan Barang</h3>
           </div>
 
           <div class="box-body">
@@ -26,35 +26,37 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Kode Barang Masuk</th>
                   <th>Kode Barang</th>
+                  <th>Kode Barang Masuk</th>
+                  <th>Kode Barang Keluar</th>
                   <th>Nama</th>
-                  <th>Tanggal Masuk</th>
-                  <th>Harga</th>
                   <th>Jumlah</th>
+                  <th>Stok</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                <% for (let i = 0; i < barang_masuk.length; i++ ) { %>
                 <tr>
-                  <td><%= i + 1 %></td>
-                  <td><%= barang_masuk[i].kode_barang_masuk %></td>
-                  <td><%= barang_masuk[i].Barang.kode_barang %></td>
-                  <td><%= barang_masuk[i].Barang.nama_barang %></td>
-                  <td><%= barang_masuk[i].tanggal_masuk %></td>
-                  <td><%= barang_masuk[i].Barang.harga %></td>
-                  <td><%= barang_masuk[i].jumlah %></td>
-                  <td>
-                    <button class="btn btn-danger btn-sm" onclick="delete_barang_masuk(`<%= barang_masuk[i].id %>`)">
-                      <span class="glyphicon glyphicon-remove"></span>
-                      Delete
-                    </button>
-                  </td>
+                  <th>1</th>
+                  <th>K-001</th>
+                  <th>BM-001</th>
+                  <th>-</th>
+                  <th>kUE</th>
+                  <th>5</th>
+                  <th>15</th>
+                  <th>Aksi</th>
                 </tr>
-                <% } %>
 
-
+                <tr>
+                  <th>2</th>
+                  <th>K-001</th>
+                  <th>-</th>
+                  <th>BK-001</th>
+                  <th>kUE</th>
+                  <th>5</th>
+                  <th>10</th>
+                  <th>Aksi</th>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -70,10 +72,7 @@
 </div>
 
 <!-- include add modal -->
-<%- include add_modal.ejs %>
 
-<!-- include edit modal -->
-<%- include edit_modal.ejs %>
 
 <%- include ../../partials/admin_layout/footer.ejs %>
 <!-- page script -->
@@ -84,20 +83,20 @@
 
     // redirect halaman guru
     function successTambah() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/barang-masuk')
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/barang')
     }
 
     // function simpan
-    $('#simpan_barang_masuk').on('submit', function (event) {
+    $('#simpan_barang').on('submit', function (event) {
       event.preventDefault();
       $.ajax({
-        url: "/admin/barang-masuk/create",
+        url: "/admin/barang/create",
         method: "POST",
         data: $(this).serialize(),
         success: function () {
           swal({
             title: "Success",
-            text: "Success Tambah Data Barang Masuk",
+            text: "Success Tambah Data Barang",
             icon: "success",
             button: "Oke",
           }).then(suksesDelete => {
@@ -108,11 +107,33 @@
     })
   })
 
-  /* delete barang asuk */
-  function delete_barang_masuk(id) {
-    let BarangMasukId = id;
+
+  // Change Status 
+  function update_status(id) {
+    let idGuru = id;
     swal({
-      title: "Yakin Ingin Menghapus Data Barang Masuk ini?",
+      title: "Yakin Ingin Change Status?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        swal({
+          title: "Success",
+          text: "Success Change Status",
+          icon: "success",
+        }).then(suksesChange => {
+          window.location.assign(`/admin/guru/status/${idGuru}`);
+        });
+      }
+    });
+  }
+
+  // Delete guru 
+  function delete_barang(id) {
+    let BarangId = id;
+    swal({
+      title: "Yakin Ingin Menghapus Data Barang ini?",
       text: "Data yang dihapus, tidak bisa kembali lagi.",
       icon: "warning",
       buttons: true,
@@ -121,11 +142,11 @@
       if (willDelete) {
         swal({
           title: "Success",
-          text: "Success Delete Data Barang Masuk",
+          text: "Success Delete Data Barang",
           icon: "success",
           button: "Oke",
         }).then(suksesDelete => {
-          window.location.assign(`/admin/barang-masuk/delete/${BarangMasukId}`);
+          window.location.assign(`/admin/barang/delete/${BarangId}`);
         });
       }
     });
