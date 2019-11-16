@@ -520,3 +520,11 @@
   <!-- /.content -->
 </div>
 <%- include ../../partials/admin_layout/footer.ejs %>
+
+<% if(action === "view") { %>
+<script type="text/javascript">
+  swal('Good job!',
+    'You clicked the button!',
+    'success');
+</script>
+<% } %>

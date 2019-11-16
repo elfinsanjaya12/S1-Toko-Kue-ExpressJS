@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const Op = require("sequelize").Op;
 
 /* GET login page from template adminlte. */
@@ -20,6 +20,7 @@ exports.actionLogin = async (req, res) => {
         role: user.role,
         status: user.status
       }
+      console.log(req.session.user)
       if (user.role === "admin") {
         res.redirect("/admin");
       } else if (user.role === "guru") {
@@ -32,4 +33,14 @@ exports.actionLogin = async (req, res) => {
   } else {
     res.render("login", { action: "view" });
   }
+}
+
+/**
+ * action logout
+ * get
+ * /logout
+ */
+exports.actionLogout = async (req, res) => {
+  req.session.destroy()
+  res.redirect('/signin');
 }

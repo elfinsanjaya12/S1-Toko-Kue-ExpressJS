@@ -1,4 +1,9 @@
-const { BarangMasuk, Barang, Persediaan } = require('../models')
+const {
+  BarangMasuk,
+  Barang,
+  Persediaan,
+  History
+} = require('../models')
 const Op = require("sequelize").Op
 
 /*
@@ -46,14 +51,13 @@ exports.actionCreate = async (req, res) => {
       barang.stok += Number(jumlah)
       await barang.save();
 
-
       /* membuat kode barang automatic */
       const barang_masuk = await BarangMasuk.findAll({
         order: [
           ['id', 'DESC'],
         ],
       })
-      // ambil data kode barang paling akhir dengan desc
+      /** ambil data kode barang paling akhir dengan desc */
       const data = barang_masuk[0].kode_barang_masuk;
       var reg = /\d/g;
       var match = data.match(reg);
@@ -68,15 +72,26 @@ exports.actionCreate = async (req, res) => {
       let code_auto = kode + auto;
       /* akhir kode barang automatic */
 
-      await BarangMasuk.create({
+      BarangMasuk.create({
         kode_barang_masuk: code_auto,
         BarangId,
         jumlah,
         tanggal_masuk
-      })
-      res.redirect("/admin/barang-masuk");
+      }).then((barang_masuk) => {
+        History.create({
+          BarangMasukId: barang_masuk.id,
+          PersediaanId: barang.id,
+          stok: barang.stok,
+          tanggal: new Date()
+        }).then(() => {
+          res.redirect("/admin/barang-masuk");
+        }).catch((err) => {
+          res.redirect("/admin/barang-masuk");
+        });
+      }).catch((err) => {
+        res.redirect("/admin/barang-masuk");
+      });
     }
-    res.redirect("/admin/barang-masuk");
   } catch (err) {
     throw err
   }

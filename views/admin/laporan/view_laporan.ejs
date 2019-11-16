@@ -22,43 +22,9 @@
                 Tambah
               </button>
             </div>
-            <table id="barang" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Kode Barang</th>
-                  <th>Kode Barang Masuk</th>
-                  <th>Kode Barang Keluar</th>
-                  <th>Nama</th>
-                  <th>Jumlah</th>
-                  <th>Stok</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <th>K-001</th>
-                  <th>BM-001</th>
-                  <th>-</th>
-                  <th>kUE</th>
-                  <th>5</th>
-                  <th>15</th>
-                  <th>Aksi</th>
-                </tr>
+            <!-- include table -->
+            <%- include tab_table.ejs %>
 
-                <tr>
-                  <th>2</th>
-                  <th>K-001</th>
-                  <th>-</th>
-                  <th>BK-001</th>
-                  <th>kUE</th>
-                  <th>5</th>
-                  <th>10</th>
-                  <th>Aksi</th>
-                </tr>
-              </tbody>
-            </table>
           </div>
           <!-- /.box-body -->
         </div>
@@ -79,92 +45,7 @@
 <script>
   $(document).ready(function () {
     // datatable
-    $('#barang').DataTable()
-
-    // redirect halaman guru
-    function successTambah() {
-      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/barang')
-    }
-
-    // function simpan
-    $('#simpan_barang').on('submit', function (event) {
-      event.preventDefault();
-      $.ajax({
-        url: "/admin/barang/create",
-        method: "POST",
-        data: $(this).serialize(),
-        success: function () {
-          swal({
-            title: "Success",
-            text: "Success Tambah Data Barang",
-            icon: "success",
-            button: "Oke",
-          }).then(suksesDelete => {
-            successTambah();
-          });
-        },
-      })
-    })
+    $('#barang').DataTable();
   })
-
-
-  // Change Status 
-  function update_status(id) {
-    let idGuru = id;
-    swal({
-      title: "Yakin Ingin Change Status?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(willDelete => {
-      if (willDelete) {
-        swal({
-          title: "Success",
-          text: "Success Change Status",
-          icon: "success",
-        }).then(suksesChange => {
-          window.location.assign(`/admin/guru/status/${idGuru}`);
-        });
-      }
-    });
-  }
-
-  // Delete guru 
-  function delete_barang(id) {
-    let BarangId = id;
-    swal({
-      title: "Yakin Ingin Menghapus Data Barang ini?",
-      text: "Data yang dihapus, tidak bisa kembali lagi.",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true
-    }).then(willDelete => {
-      if (willDelete) {
-        swal({
-          title: "Success",
-          text: "Success Delete Data Barang",
-          icon: "success",
-          button: "Oke",
-        }).then(suksesDelete => {
-          window.location.assign(`/admin/barang/delete/${BarangId}`);
-        });
-      }
-    });
-  }
-
-  //showing data to edit modal      
-  $('#barang').on('click', '.edit', function () {
-    var id = $(this).data('id');
-    var kode = $(this).data('kode');
-    var nama = $(this).data('nama');
-    var satuan = $(this).data('satuan');
-    var harga = $(this).data('harga');
-    $('#edit_modal').modal('show');
-    $('.nama').val(nama);
-    $('.kode').val(kode);
-    $('.harga').val(harga);
-    $(".satuan").val(satuan);
-    $('.id').val(id);
-  });
 
 </script>

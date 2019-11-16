@@ -31,7 +31,6 @@ exports.actionCreate = async (req, res) => {
       barang.stok -= Number(jumlah)
       await barang.save();
 
-
       /* membuat kode barang automatic */
       const barang_keluar = await BarangKeluar.findAll({
         order: [
