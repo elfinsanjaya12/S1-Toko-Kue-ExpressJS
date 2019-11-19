@@ -8,11 +8,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      BarangId: {
-        type: Sequelize.INTEGER
-      },
       tanggal: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       produksi: {
         type: Sequelize.INTEGER

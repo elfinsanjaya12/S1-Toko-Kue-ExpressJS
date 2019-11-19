@@ -2,7 +2,8 @@ const {
   BarangMasuk,
   Barang,
   Persediaan,
-  History
+  History,
+  Produksi
 } = require('../models')
 const Op = require("sequelize").Op
 
@@ -37,7 +38,7 @@ exports.viewBarangMasuk = async (req, res) => {
 * /admin/barang-masuk/create
 */
 exports.actionCreate = async (req, res) => {
-  const {
+  var {
     BarangId,
     jumlah,
     tanggal_masuk
@@ -78,19 +79,74 @@ exports.actionCreate = async (req, res) => {
         jumlah,
         tanggal_masuk
       }).then((barang_masuk) => {
-        History.create({
-          BarangMasukId: barang_masuk.id,
-          PersediaanId: barang.id,
-          stok: barang.stok,
-          tanggal: new Date()
-        }).then(() => {
-          res.redirect("/admin/barang-masuk");
+        Produksi.findOne({
+          where: {
+            tanggal: { [Op.eq]: barang_masuk.tanggal_masuk }
+          }
+        }).then((produksi_cek) => {
+          console.log(produksi_cek)
+          if (produksi_cek === null) {
+
+            Produksi.create({
+              produksi: jumlah, //barang_masuk.jumlah
+              jumlah_persediaan: jumlah,//produksi_cek.produksi + jumlah - produksi_cek.permintaan
+              tanggal: tanggal_masuk
+            }).then((create_produksi) => {
+              console.log(create_produksi)
+              console.log("else")
+              res.redirect("/admin/barang-masuk");
+            }).catch((err) => {
+              res.redirect("/admin/barang-masuk");
+            });
+          } else {
+
+            return produksi_cek.update({
+              produksi: Number(produksi_cek.produksi) + Number(barang_masuk.jumlah),
+              jumlah_persediaan: Number(produksi_cek.produksi) + Number(jumlah) - Number(produksi_cek.permintaan),
+              tanggal: tanggal_masuk
+            }).then(() => {
+              console.log("if")
+              res.redirect("/admin/barang-masuk");
+            }).catch((err) => {
+              res.redirect("/admin/barang-masuk");
+            });
+          }
+          // if (produksi !== null) {
+          //   return produksi.update({
+          //     produksi: produksi_cek.produksi + barang_masuk.jumlah,
+          //     jumlah_persediaan: produksi_cek.produksi + jumlah - produksi_cek.permintaan,
+          //     tanggal: tanggal_masuk
+          //   }).then(() => {
+          //     console.log("if")
+          //     res.redirect("/admin/barang-masuk");
+          //   }).catch((err) => {
+          //     res.redirect("/admin/barang-masuk");
+          //   });
+          // } else {
+          //   console.log("else atas" + barang_masuk)
+          //   Produksi.create({
+          //     produksi: 10, //barang_masuk.jumlah
+          //     jumlah_persediaan: jumlah,//produksi_cek.produksi + jumlah - produksi_cek.permintaan
+          //     tanggal: tanggal_masuk
+          //   }).then((create_produksi) => {
+          //     console.log(create_produksi)
+          //     console.log("else")
+          //     res.redirect("/admin/barang-masuk");
+          //   }).catch((err) => {
+          //     res.redirect("/admin/barang-masuk");
+          //   });
+          // }
         }).catch((err) => {
           res.redirect("/admin/barang-masuk");
         });
       }).catch((err) => {
         res.redirect("/admin/barang-masuk");
       });
+
+      // cek table produksi berdasarkan tanggal barang masuk 
+      // jika tanggal produksi ada makan update produksi
+      // selain itu create produksi baru
+
     }
   } catch (err) {
     throw err

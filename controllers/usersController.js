@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const Op = require("sequelize").Op;
+const Swal = require('sweetalert2')
 
 /* GET login page from template adminlte. */
 exports.viewSignin = async (req, res) => {
@@ -41,6 +42,6 @@ exports.actionLogin = async (req, res) => {
  * /logout
  */
 exports.actionLogout = async (req, res) => {
-  req.session.destroy()
+  req.session.destroy();
   res.redirect('/signin');
 }
