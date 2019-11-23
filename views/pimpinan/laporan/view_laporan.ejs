@@ -1,0 +1,72 @@
+<%- include ../../partials/pimpinan_layout/header.ejs %>
+<%- include ../../partials/pimpinan_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-body">
+
+            <!-- include table -->
+            <table id="myTable" class="display nowrap" style="width:100%">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Produksi</th>
+                  <th>Permintaan</th>
+
+                  <th>Jumlah Persediaan</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < produksi.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= produksi[i].tanggal %></td>
+                  <td><%= produksi[i].produksi %></td>
+                  <% if (produksi[i].permintaan === "" || produksi[i].permintaan === null ) { %>
+                  <td>0</td>
+                  <% } else { %>
+                  <td><%= produksi[i].permintaan %></td>
+                  <% } %>
+                  <td><%= produksi[i].jumlah_persediaan %></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- include add modal -->
+
+
+<%- include ../../partials/pimpinan_layout/footer.ejs %>
+<!-- page script -->
+<script>
+
+  $(document).ready(function () {
+    $('#myTable').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+  });
+
+</script>

@@ -1,0 +1,94 @@
+<%- include ../../partials/pimpinan_layout/header.ejs %>
+<%- include ../../partials/pimpinan_layout/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+
+      <div class="col-xs-12">
+        <div class="box">
+          <!-- /.box-header -->
+          <div class="box-header">
+            <h3 class="box-title">Data Persediaan</h3>
+          </div>
+
+          <div class="box-body">
+
+            <table id="persedian" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Tanggal Masuk</th>
+                  <th>Stok</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < persedian_barang.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= persedian_barang[i].Barang.kode_barang %></td>
+                  <td><%= persedian_barang[i].Barang.nama_barang %></td>
+                  <td><%= persedian_barang[i].tanggal_persediaan %></td>
+                  <td>
+                    <%= persedian_barang[i].stok %>
+                  </td>
+                </tr>
+                <% } %>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<%- include ../../partials/pimpinan_layout/footer.ejs %>
+<!-- page script -->
+<script>
+  $(document).ready(function () {
+    // datatable
+    $('#persedian').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    })
+
+    // redirect halaman guru
+    function successTambah() {
+      window.location.replace(window.location.protocol + "//" + window.location.host + '/admin/persediaan-barang')
+    }
+
+    // function simpan
+    $('#simpan_barang').on('submit', function (event) {
+      event.preventDefault();
+      $.ajax({
+        url: "/admin/persediaan-barang/create",
+        method: "POST",
+        data: $(this).serialize(),
+        success: function () {
+          swal({
+            title: "Success",
+            text: "Success Tambah Data Persediaan Barang",
+            icon: "success",
+            button: "Oke",
+          }).then(suksesDelete => {
+            successTambah();
+          });
+        },
+      })
+    })
+
+  })
+</script>

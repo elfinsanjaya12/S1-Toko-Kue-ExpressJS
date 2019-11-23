@@ -14,6 +14,7 @@ let barangMasukRouter = require('./routes/barang_masuk');
 let barangKeluarRouter = require('./routes/barang_keluar');
 let persediaanBarangRouter = require('./routes/persediaan_barang');
 let laporanRouter = require('./routes/laporan');
+let pimpinanRouter = require('./routes/pimpinan');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use('/admin/barang-masuk/', barangMasukRouter);
 app.use('/admin/barang-keluar/', barangKeluarRouter);
 app.use('/admin/persediaan-barang/', persediaanBarangRouter);
 app.use('/admin/laporan/', laporanRouter);
+app.use('/pimpinan', pimpinanRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

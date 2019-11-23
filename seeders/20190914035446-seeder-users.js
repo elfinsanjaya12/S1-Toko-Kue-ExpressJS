@@ -18,7 +18,7 @@ module.exports = {
         {
           username: "elfin",
           password: password,
-          role: "guru",
+          role: "pimpinan",
           status: "Active",
           createdAt: new Date(),
           updatedAt: new Date()

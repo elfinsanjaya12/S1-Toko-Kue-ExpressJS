@@ -24,8 +24,8 @@ exports.actionLogin = async (req, res) => {
       console.log(req.session.user)
       if (user.role === "admin") {
         res.redirect("/admin");
-      } else if (user.role === "guru") {
-        res.redirect("/pimpinan");
+      } else if (user.role === "pimpinan") {
+        res.redirect("/pimpinan/laporan");
       }
     } else {
       res.render("login", { action: "view" });
