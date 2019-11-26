@@ -16,6 +16,8 @@ let persediaanBarangRouter = require('./routes/persediaan_barang');
 let laporanRouter = require('./routes/laporan');
 let pimpinanRouter = require('./routes/pimpinan');
 
+let fuzzyRouter = require('./routes/fuzzy');
+
 var app = express();
 
 // view engine setup
@@ -56,6 +58,9 @@ app.use('/admin/barang-keluar/', barangKeluarRouter);
 app.use('/admin/persediaan-barang/', persediaanBarangRouter);
 app.use('/admin/laporan/', laporanRouter);
 app.use('/pimpinan', pimpinanRouter);
+
+
+app.use('/admin/', fuzzyRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

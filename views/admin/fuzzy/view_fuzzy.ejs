@@ -11,11 +11,10 @@
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <h3 class="box-title">Data Persediaan Barang</h3>
+            <h3 class="box-title">Perhitungan Fuzzy</h3>
           </div>
 
           <div class="box-body">
-
             <form action="">
               <div class="form-body">
 
@@ -69,7 +68,35 @@
 
 
             <!-- include table -->
-            <%- include tab_table.ejs %>
+            <table id="barang" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Produksi</th>
+                  <th>Permintaan</th>
+
+                  <th>Jumlah Persediaan</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < produksi.length; i++ ) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= produksi[i].tanggal %></td>
+                  <td><%= produksi[i].produksi %></td>
+                  <% if (produksi[i].permintaan === "" || produksi[i].permintaan === null ) { %>
+                  <td>0</td>
+                  <% } else { %>
+                  <td><%= produksi[i].permintaan %></td>
+                  <% } %>
+                  <td><%= produksi[i].jumlah_persediaan %></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+
 
           </div>
           <!-- /.box-body -->
