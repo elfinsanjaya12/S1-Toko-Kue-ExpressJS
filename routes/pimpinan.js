@@ -7,6 +7,7 @@ let {
 
 const auth = require("../middlewares/auth")
 
+router.get("/", auth.isLogin, viewBarang)
 router.get("/laporan", auth.isLogin, viewBarang)
 router.get("/persediaan-barang", auth.isLogin, viewPersediaan)
 
