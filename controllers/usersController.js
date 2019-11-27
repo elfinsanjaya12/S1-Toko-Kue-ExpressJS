@@ -28,11 +28,10 @@ exports.actionLogin = async (req, res) => {
         res.redirect("/pimpinan/laporan");
       }
     } else {
-      res.render("login", { action: "view" });
       res.redirect("/signin");
     }
   } else {
-    res.render("login", { action: "view" });
+    res.redirect("/signin");
   }
 }
 

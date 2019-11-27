@@ -2,71 +2,19 @@
 <%- include ../../partials/admin_layout/sidebar.ejs %>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-
   <!-- Main content -->
   <section class="content">
     <div class="row">
-
       <div class="col-xs-12">
         <div class="box">
           <!-- /.box-header -->
           <div class="box-header">
-            <h3 class="box-title">Perhitungan Fuzzy</h3>
+            <div class="callout callout-info">
+              <h4>Hasil Perhitungan Fuzzy!</h4>
+              <p>Pesediksi Persediaan Hari Besok adalah <b> <%= hasil %> </b></p>
+            </div>
           </div>
-
           <div class="box-body">
-            <form action="">
-              <div class="form-body">
-
-
-                <div class="col-md-4">
-
-                  <div class="form-group">
-                    <label for="inputDatepickerTglLahir">Dari Tanggal</label>
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="date" required name="tanggal_persediaan" class="form-control pull-right"
-                        id="inputDatepickerTglLahir" />
-                    </div>
-
-                  </div>
-                </div>
-                <div class="col-md-4">
-
-                  <div class="form-group">
-                    <label for="inputDatepickerTglLahir">Sampai Tanggal</label>
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="date" required name="tanggal_persediaan" class="form-control pull-right"
-                        id="inputDatepickerTglLahir" />
-                    </div>
-
-                  </div>
-                </div>
-                <div class="col-md-1">
-
-                  <!-- <button class="btn btn-success">Tambah</button> -->
-                  <button style="margin-top: 22px;" type="button" class="btn btn-success" data-toggle="modal"
-                    data-target="#add_modal">
-                    <!-- <span class="glyphicon glyphicon-plus"></span> -->
-                    Hitung
-                  </button>
-                </div>
-                <div class="col-md-3">
-
-                  <div class="form-group">
-                    <label for="jumlah">Prediksi Persediaan Hari Besok</label>
-                    <input type="number" id="jumlah" name="jumlah" class="form-control" placeholder="132" required>
-                  </div>
-                </div>
-              </div>
-            </form>
-
-
             <!-- include table -->
             <table id="barang" class="table table-bordered table-striped">
               <thead>
@@ -75,9 +23,7 @@
                   <th>Tanggal</th>
                   <th>Produksi</th>
                   <th>Permintaan</th>
-
                   <th>Jumlah Persediaan</th>
-
                 </tr>
               </thead>
               <tbody>
