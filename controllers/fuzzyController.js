@@ -44,8 +44,8 @@ exports.viewFuzzy = async (req, res) => {
   console.log(r1_hasil_nilai_naik);
 
   // logic R2 
-  var nilai_z = r1_tampung_naik + produksi[0].permintaan + r1_hasil_nilai_naik + r1_hasil_nilai_naik
-  produksi[0].permintaan + r1_tampung_naik
+  var nilai_z = r1_tampung_naik + produksi[0].permintaan + r1_hasil_nilai_naik + r1_hasil_nilai_naik /
+    produksi[0].permintaan + r1_tampung_naik
   var hasil = Math.ceil(nilai_z)
   console.log(hasil)
 
